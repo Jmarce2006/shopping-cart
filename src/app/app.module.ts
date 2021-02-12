@@ -15,6 +15,8 @@ import { AuthService } from './shared/services/auth.service';
 import { HeaderComponent } from './components/header/header.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { ProductListComponent } from './pages/product/product-list/product-list.component';
+import { CategoryListComponent } from './pages/category/category-list/category-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,11 +27,14 @@ import { ProductListComponent } from './pages/product/product-list/product-list.
     VerifyEmailComponent,
     HeaderComponent,
     ShopComponent,
-    ProductListComponent
+    ProductListComponent,
+    CategoryListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
