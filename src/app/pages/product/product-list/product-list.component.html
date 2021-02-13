@@ -5,29 +5,31 @@
     <thead class="thead-light">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
+        <tr *ngFor="let product of products; let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>
+                <img [src]="product.photoURL" style="height: 100px;width: 100px;" *ngIf="product.photoURL !='' "
+                    class="img-thumbnail">
+                <img src="assets/images/technology.svg" style="height: 100px;width: 100px;"
+                    *ngIf="product.photoURL =='' " class="img-thumbnail">
+            </td>
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td>{{ product.price | currency:'$' }}</td>
+            <td>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-warning" data-toggle="modal" [attr.data-target]="'#modalEdit'+i">
+                    Edit
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>
@@ -88,7 +90,8 @@
                     <img src="assets/images/technology.svg" style="height: 200px;" *ngIf="product.photoURL =='' "
                         class="img-thumbnail">
                     <div class="modal-footer">
-                        <button type="submit" [disabled]="productForm.invalid || product.photoURL==''" class="btn btn-primary">Create</button>
+                        <button type="submit" [disabled]="productForm.invalid || product.photoURL==''"
+                            class="btn btn-primary">Create</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>

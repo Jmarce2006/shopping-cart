@@ -16,13 +16,14 @@ export class ProductListComponent implements OnInit {
   selectedFileImage: FileList
   product: Product = {
     name: "",
-    categoryUid:"",
+    categoryUid: "",
     description: "",
     price: 0,
     photoURL: "",
     uid: ""
   }
   categories = []
+  products = []
   progressBarValueImage = ""
   constructor(
     private db: AngularFirestore,
@@ -40,6 +41,7 @@ export class ProductListComponent implements OnInit {
       categoryUid: ['', [Validators.required]],
       price: ['', [Validators.required]],
     })
+    this.getProducts()
     this.getCategories()
   }
 
@@ -50,15 +52,20 @@ export class ProductListComponent implements OnInit {
         colSnap.forEach(snap => {
           let category: any = snap.payload.doc.data()
           this.categories.push(category)
-          // console.log(category);
-
         })
       })
   }
 
-  // getProducts(){
-  //   this.db.collection("products").snapshotChanges
-  // }
+  getProducts() {
+    this.db.collection("products").snapshotChanges()
+      .subscribe(colSnap => {
+        this.products = []
+        colSnap.forEach(snap => {
+          let product: any = snap.payload.doc.data()
+          this.products.push(product)
+        })
+      })
+  }
 
   chooseFileImage(event) {
     this.selectedFileImage = event.target.files
@@ -94,10 +101,16 @@ export class ProductListComponent implements OnInit {
 
     this.db.collection("products").add(this.product).then((res: any) => {
       res.set({ uid: res.id }, { merge: true }).then(() => {
+        this.resetInputs()
         console.log("Your extra id field has been created");
       })
       //show alert create
     })
 
+  }
+
+  resetInputs() {
+    this.productForm.reset()
+    this.product.photoURL = ""
   }
 }
