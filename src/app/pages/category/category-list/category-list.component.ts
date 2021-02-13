@@ -65,4 +65,8 @@ export class CategoryListComponent implements OnInit {
     this.getCategories()
   }
 
+  resetInputs() {
+    this.categoryForm.reset()
+  }
+
 }
