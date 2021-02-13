@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from "@angular/fire/storage";
@@ -25,10 +25,12 @@ export class ProductListComponent implements OnInit {
   categories = []
   products = []
   progressBarValueImage = ""
+  updatePhotoURL = ""
   constructor(
     private db: AngularFirestore,
     private afStorage: AngularFireStorage,
     private formBuilder: FormBuilder,
+    private applicationRef:ApplicationRef
   ) { }
 
   ngOnInit(): void {
@@ -113,4 +115,49 @@ export class ProductListComponent implements OnInit {
     this.productForm.reset()
     this.product.photoURL = ""
   }
+
+
+  chooseFileImageUpdate(event) {
+    this.selectedFileImage = event.target.files
+    if (this.selectedFileImage.item(0)) {
+      this.uploadImageUpdate()
+    }
+  }
+
+  uploadImageUpdate() {
+    var filePath = `products/${this.selectedFileImage.item(0).name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+    const fileRef = this.afStorage.ref(filePath);
+    const uploadTask = this.afStorage.upload(filePath, this.selectedFileImage.item(0))
+
+    uploadTask.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          console.log(url);
+          this.updatePhotoURL = url
+          
+        })
+      })
+    ).subscribe()
+    uploadTask.percentageChanges().subscribe((value) => {
+      this.progressBarValueImage = value.toFixed(0)
+    })
+  }
+
+  updateProduct(product: Product) {
+    console.log(product);
+    
+    if (this.updatePhotoURL !== "") {
+      product.photoURL = this.updatePhotoURL
+    }
+    this.db.collection("products").
+      doc(product.uid).update(product).then(() => {
+        console.log("updated product");
+        
+        //show alert update
+      }, error => {
+        console.log(error);
+
+      })
+  }
+
 }
