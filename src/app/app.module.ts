@@ -8,7 +8,6 @@ import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/auth/verify-email/verify-email.component';
 import { AuthService } from './shared/services/auth.service';
-import { ShopComponent } from './pages/shop/shop.component';
 import { ProductListComponent } from './pages/product/product-list/product-list.component';
 import { CategoryListComponent } from './pages/category/category-list/category-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +15,16 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { NavComponent } from './components/shared/nav/nav.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { HeaderComponent } from './components/shared/header/header.component';
+import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
+import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
+import { CartComponent } from './pages/shopping-cart/cart/cart.component';
+import { FiltersComponent } from './pages/shopping-cart/filters/filters.component';
+import { ProductItemComponent } from './pages/shopping-cart/list-product/product-item/product-item.component';
+import { ListProductComponent } from './pages/shopping-cart/list-product/list-product.component';
+import { CartItemComponent } from './pages/shopping-cart/cart/cart-item/cart-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,9 +32,18 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    ShopComponent,
     ProductListComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    NavComponent,
+    FooterComponent,
+    HeaderComponent,
+    PageNotFoundComponent,
+    ShoppingCartComponent,
+    CartComponent,
+    FiltersComponent,
+    ProductItemComponent,
+    ListProductComponent,
+    CartItemComponent
   ],
   imports: [
     BrowserModule,

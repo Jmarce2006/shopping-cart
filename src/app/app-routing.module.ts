@@ -5,9 +5,9 @@ import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/auth/verify-email/verify-email.component';
 import { AuthGuard } from './shared/guard/auth.guard';
-import { ShopComponent } from './pages/shop/shop.component';
 import { ProductListComponent } from './pages/product/product-list/product-list.component';
 import { CategoryListComponent } from './pages/category/category-list/category-list.component';
+import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/shop', pathMatch: 'full' },
@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: 'register-user', component: SignUpComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent },
-  { path: 'shop', component: ShopComponent },
   { path: 'product-list', component: ProductListComponent },
   { path: 'category-list', component: CategoryListComponent },
+  { path: 'shop', component: ShoppingCartComponent },
 
 ];
 
