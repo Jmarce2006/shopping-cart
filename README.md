@@ -6,14 +6,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Admin Features
 To access admin features please login with email: admin@gmail.com password: admin123
 
-### CRUD PRODUCTS
-### CRUD CATEGORIES
-### LIST ORDERS
+- CRUD PRODUCTS
+- CRUD CATEGORIES
+- LIST ORDERS
 
 ## User Features
-### Shop
-### Cart
-### CheckOut
+- Shop
+- Cart
+- CheckOut
 ### Login and Register
 Users can log or register with email or GOOGLE Account
 
