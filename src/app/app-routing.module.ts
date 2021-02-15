@@ -7,17 +7,17 @@ import { VerifyEmailComponent } from './components/auth/verify-email/verify-emai
 import { AuthGuard } from './shared/guard/auth.guard';
 import { ProductListComponent } from './pages/product/product-list/product-list.component';
 import { CategoryListComponent } from './pages/category/category-list/category-list.component';
-import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
+import { CatalogComponent } from './pages/catalog/catalog.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/shop', pathMatch: 'full' },
+  { path: '', redirectTo: '/catalog', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent },
   { path: 'product-list', component: ProductListComponent },
   { path: 'category-list', component: CategoryListComponent },
-  { path: 'shop', component: ShoppingCartComponent },
+  { path: 'catalog', component: CatalogComponent },
 
 ];
 

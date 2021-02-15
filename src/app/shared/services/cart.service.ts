@@ -47,7 +47,7 @@ export class CartService {
     for (const p of this.cart) {
       if (p.uid === product.uid) {
         p.qty -= 1;
-        if (p.cantidad == 0) {
+        if (p.qty == 0) {
           this.cart.splice(cont, 1);
         }
       }
