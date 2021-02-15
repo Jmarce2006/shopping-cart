@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 
 export class AuthService {
   userData: any; // Save logged in user data
-
+  isAdmin: boolean = false;
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -23,7 +23,9 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         console.log(user);
-        
+        if (user.email == "admin@gmail.com") {
+          this.isAdmin = true
+        }
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
@@ -39,7 +41,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['catalog']);
         });
         this.SetUserData(result.user);
       }).catch((error) => {
@@ -81,7 +83,7 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+    return (user !== null) ? true : false;
   }
 
   // Sign in with Google
@@ -94,7 +96,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['catalog']);
         })
         this.SetUserData(result.user);
       }).catch((error) => {
@@ -122,6 +124,7 @@ export class AuthService {
   // Sign out 
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {
+      this.isAdmin = false
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
     })

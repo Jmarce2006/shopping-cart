@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, OnInit, ViewChild } from '@angular/core';
+import {  Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from "@angular/fire/storage";
@@ -30,7 +30,6 @@ export class ProductListComponent implements OnInit {
     private db: AngularFirestore,
     private afStorage: AngularFireStorage,
     private formBuilder: FormBuilder,
-    private applicationRef:ApplicationRef
   ) { }
 
   ngOnInit(): void {

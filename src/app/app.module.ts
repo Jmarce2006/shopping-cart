@@ -20,6 +20,8 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +36,8 @@ import { CatalogComponent } from './pages/catalog/catalog.component';
     HeaderComponent,
     PageNotFoundComponent,
     CatalogComponent,
+    CartComponent,
+    CheckoutComponent,
     
   ],
   imports: [

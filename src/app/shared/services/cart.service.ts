@@ -16,7 +16,7 @@ export class CartService {
 
 
   getCart() {
-    return this.cart;
+    return this.cart = JSON.parse(localStorage.getItem("cart"));
   }
 
   getCartItemCount() {
@@ -24,7 +24,7 @@ export class CartService {
   }
 
   addProduct(product: Product) {
-
+    this.getCart()
     let added = false;
     for (let p of this.cart) {
       if (p.uid === product.uid) {
@@ -37,11 +37,13 @@ export class CartService {
       product.qty = 1
       this.cart.push(product);
     }
+    localStorage.setItem("cart", JSON.stringify(this.cart))
     this.cartItemCount.next(this.cartItemCount.value + 1);
 
   }
 
   decreaseProduct(product: Product) {
+    this.getCart()
     let cont = 0
 
     for (const p of this.cart) {
@@ -53,6 +55,9 @@ export class CartService {
       }
       cont++;
     }
+    console.log(this.cart);
+
+    localStorage.setItem("cart", JSON.stringify(this.cart))
     this.cartItemCount.next(this.cartItemCount.value - 1);
   }
 
