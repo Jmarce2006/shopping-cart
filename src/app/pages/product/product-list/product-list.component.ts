@@ -1,9 +1,10 @@
-import {  Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from "@angular/fire/storage";
 import { finalize } from "rxjs/operators";
 import { Product } from '../../../shared/services/product';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -102,16 +103,19 @@ export class ProductListComponent implements OnInit {
 
     this.db.collection("products").add(this.product).then((res: any) => {
       res.set({ uid: res.id }, { merge: true }).then(() => {
+
         this.resetInputs()
         console.log("Your extra id field has been created");
       })
       //show alert create
     })
 
+
   }
 
   resetInputs() {
     this.productForm.reset()
+    this.selectedFileImage = null
     this.product.photoURL = ""
   }
 
@@ -133,7 +137,7 @@ export class ProductListComponent implements OnInit {
         fileRef.getDownloadURL().subscribe((url) => {
           console.log(url);
           this.updatePhotoURL = url
-          
+
         })
       })
     ).subscribe()
@@ -144,19 +148,42 @@ export class ProductListComponent implements OnInit {
 
   updateProduct(product: Product) {
     console.log(product);
-    
+
     if (this.updatePhotoURL !== "") {
       product.photoURL = this.updatePhotoURL
     }
     this.db.collection("products").
       doc(product.uid).update(product).then(() => {
         console.log("updated product");
-        
+
         //show alert update
       }, error => {
         console.log(error);
 
       })
+  }
+
+  deleteProduct(item) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Your will not be able to recover this product!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel please!",
+    }).then((result) => {
+      console.log(result);
+
+      if (!result.isConfirmed) return;
+
+      this.db.collection("products").doc(item.uid).delete().then(() => {
+        Swal.fire("Deleted!",
+          "Your product has been deleted.",
+          "success");
+      }).catch((error) => {
+
+      })
+    })
   }
 
 }

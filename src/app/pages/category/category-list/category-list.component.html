@@ -20,6 +20,9 @@
                 <button type="button" class="btn btn-warning" data-toggle="modal" [attr.data-target]="'#modalEdit'+i">
                     Edit
                 </button>
+                <button type="button" class="btn btn-danger" (click)="deleteCategory(category)">
+                    Remove
+                </button>
             </td>
             <!-- Modal -->
             <!-- <div class="modal fade"  tabindex="-1" role="dialog" -->

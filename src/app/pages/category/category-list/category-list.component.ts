@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-category-list',
@@ -63,6 +64,29 @@ export class CategoryListComponent implements OnInit {
 
   closeModalEdit() {
     this.getCategories()
+  }
+
+  deleteCategory(item) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Your will not be able to recover this category!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel please!",
+    }).then((result) => {
+      console.log(result);
+
+      if (!result.isConfirmed) return;
+
+      this.db.collection("categories").doc(item.uid).delete().then(() => {
+        Swal.fire("Deleted!",
+          "Your category has been deleted.",
+          "success");
+      }).catch((error) => {
+
+      })
+    })
   }
 
   resetInputs() {

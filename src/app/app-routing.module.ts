@@ -10,6 +10,7 @@ import { CategoryListComponent } from './pages/category/category-list/category-l
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { OrderListComponent } from './pages/order-list/order-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/catalog', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'catalog', component: CatalogComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'order-list', component: OrderListComponent },
 
 ];
 

@@ -30,6 +30,9 @@
                     [attr.data-target]="'#modalEditProduct'+i">
                     Edit
                 </button>
+                <button type="button" class="btn btn-danger" (click)="deleteProduct(product)" >
+                    Remove
+                </button>
             </td>
             <!-- Modal -->
             <!-- <div class="modal fade"  tabindex="-1" role="dialog" -->
@@ -73,7 +76,8 @@
                                 <button type="button" style="margin-top: 10px; margin-left: 10px;"
                                     class="btn btn-outline-dark" (click)="fileInput.click()">Choose
                                     Image </button>
-                                <input #fileInput type="file" (change)="chooseFileImageUpdate($event)" style="display: none;">
+                                <input #fileInput type="file" (change)="chooseFileImageUpdate($event)"
+                                    style="display: none;">
                             </div>
 
                             <div class="progress">

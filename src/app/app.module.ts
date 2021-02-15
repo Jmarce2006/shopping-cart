@@ -22,6 +22,7 @@ import { PageNotFoundComponent } from './components/shared/page-not-found/page-n
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { OrderListComponent } from './pages/order-list/order-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
     CatalogComponent,
     CartComponent,
     CheckoutComponent,
+    OrderListComponent,
     
   ],
   imports: [

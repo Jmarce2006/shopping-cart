@@ -8,6 +8,7 @@
 
     <a *ngIf="authService.isAdmin" class="p-2 text-dark" [routerLink]="['/category-list']">Admin Categories</a>
     <a *ngIf="authService.isAdmin" class="p-2 text-dark" [routerLink]="['/product-list']">Admin Products</a>
+    <a *ngIf="authService.isAdmin" class="p-2 text-dark" [routerLink]="['/order-list']">Admin Orders</a>
 
   </nav>
   <div *ngIf="!authService.isLoggedIn">
@@ -20,9 +21,6 @@
       {{authService.userData.displayName}}
       <text *ngIf="!authService.userData.displayName">
         Username
-      </text>
-      <text *ngIf="authService.isAdmin" >
-
       </text>
       <img *ngIf="authService.userData.photoURL" [src]="authService.userData.photoURL" width="50px" height="50px"
         class="img-thumbnail">

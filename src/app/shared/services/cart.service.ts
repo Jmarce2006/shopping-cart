@@ -16,7 +16,16 @@ export class CartService {
 
 
   getCart() {
-    return this.cart = JSON.parse(localStorage.getItem("cart"));
+    try {
+      let cartT = JSON.parse(localStorage.getItem("cart"));
+      // console.log(cartT);
+      if (cartT != null) {
+        this.cart = cartT
+      }
+    } catch (error) {
+
+    }
+    return this.cart
   }
 
   getCartItemCount() {
